@@ -1,0 +1,61 @@
+[user]
+	name = Michael Leung
+	email = Michael.Leung@metaswitch.com
+
+[alias]
+	co = checkout
+	cm = commit
+	rb = rebase
+	br = branch
+  df = diff --color
+  fd = diff --name-only
+	st = status
+  cp = cherry-pick
+	hist = log --all --graph --pretty='[%C(cyan)%h%Creset]%C(bold cyan)%d%Creset %s'
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  lgtime = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit --date=iso
+  lgme = !git lg --author='Michael Leung' # Log only my commits
+  cob = checkout -b # Create and switch branch
+  up = !git pom && git co - && git rebase master # Update master, rebase onto it
+  pom = !git co master && git fetch && git pull origin master # Do a fetch and update master
+  save = !git add -A && git commit -m 'SAVEPOINT' # Create a quick and dirty commit for easy branch switching
+  saveout = !git save && git co # Save and swap branch
+  undo = reset HEAD~1 --mixed # Uncommit most recent, the opposite of 'git save'
+  amend = commit -a --amend
+  wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard # I don't use this
+  unstage = reset HEAD
+  pop = stash pop
+  brs = log --branches --graph --pretty='[%C(cyan)%h%Creset]%C(bold cyan)%d%Creset %s'
+  changed = !git diff $(git merge-base $(git rev-parse --abbrev-ref HEAD) $(git rev-parse --abbrev-ref --symbolic-full-name @{u}))
+  pushme = !git push origin $(git rev-parse --abbrev-ref HEAD)
+  pullme = !git pull origin $(git rev-parse --abbrev-ref HEAD)
+
+[branch "master"]
+;	mergeoptions = --no-ff
+
+[core]
+  ;autocrlf = input
+  ;
+[merge]
+	tool = vimdiff
+
+[mergetool "diffconflicts"]
+	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
+	keepBackup = false
+	trustExitCode = true
+
+[diff]
+;    external = git_diff_wrapper
+[pager]
+;    diff =
+[merge]
+;	tool = diffconflicts
+[mergetool "diffconflicts"]
+;	cmd = diffconflicts gvim $BASE $LOCAL $REMOTE $MERGED
+;	trustExitCode = true
+;	keepBackup = false
+[push]
+	default = matching
+[difftool "vimdiff"]
+  cmd = "vimdiff  \"$REMOTE\" \"$LOCAL\""
+

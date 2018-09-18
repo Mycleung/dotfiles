@@ -48,21 +48,6 @@ function! NumberToggle()
 endfunc 
 nnoremap <C-n> :call NumberToggle()<CR>
 
-" Mail command
-command Mail !email.sh 'ml3@intranet.datcon.co.uk' %
-
-" Simple plugin settings
-let g:ctrlp_match_func = {'match' : 'matcher#cmatch' }
-let g:rainbow_active = 1
-let g:sh_no_error = 1
-let g:pymode = 1
-let g:pymode_lint = 1
-let g:pymode_lint_unmodified = 1
-let g:pymode_lint_ignore = "E125"
-let g:pymode_rope = 0
-let g:pymode_doc = 1
-let g:pymode_folding = 0
-
 " Go syntax highlighting and stuff.
 filetype off
 filetype plugin indent off
@@ -97,36 +82,3 @@ let g:ctrlp_custom_ignore = {
 " Tag searching wth CtrlP
 map <C-o> :CtrlPGtags<CR>
 set rtp+=$HOME/.vim/bundle/CtrlPGtags
-
-" Vundle options:
-set rtp+=~/.vim/bundle/vundle
-call vundle#rc()
-
-" Let Vundle manage itself (required)
-Bundle 'gmarik/vundle'
-
-" My Bundles:
-"
-" Github repos
-Bundle 'kien/ctrlp.vim'
-Bundle 'klen/python-mode'
-Bundle 'JazzCore/ctrlp-cmatcher'
-Bundle 'rking/ag.vim'
-
-Bundle 'derekwyatt/vim-scala'
-
-" Gitlab repos
-" Sign up to Gitlab and then comment these in!
-Bundle 'ssh://git@gitlab.datcon.co.uk/vimips.git'
-" Bundle 'ssh://git@gitlab.datcon.co.uk/autocomment.git'
-
-filetype plugin on " Required for Vundle
-"
-" Brief help
-" :BundleList          - list configured bundles
-" :BundleInstall(!)    - install(update) bundles
-" :BundleSearch(!) foo - search(or refresh cache first) for foo
-" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
-"
-" see :h vundle for more details or wiki for FAQ
-" NOTE: comments after Bundle command are not allowed..

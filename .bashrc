@@ -1,9 +1,10 @@
 # .bashrc
 
 # Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
+[ -f /etc/bashrc ] && . /etc/bashrc
+
+# System-specific .bashrc
+[ -f ~/.bashrc_local ] && . ~/.bashrc_local
 
 # User specific aliases and functions
 
@@ -12,9 +13,6 @@ alias cp='cp -i'
 alias mv='mv -i'
 alias ll='ls -h'
 alias grep='grep --color -I'
-# Our version of ssh is too new for scon, need a specific ssh command to get onto them
-alias scon='ssh -c 3des-cbc'
-alias tidylogs='find ${HOME}/consolelogs/ -mtime +20 -delete'
 
 # mkdir and cd
 mkdircd() { mkdir "$1" && cd "$1" ; }
@@ -22,9 +20,6 @@ mkdircd() { mkdir "$1" && cd "$1" ; }
 # IDES
 # alias idea='nohup /data/home/ML3/scala/idea-IC-143.381.42/bin/idea.sh > /dev/null 2>&1 &'
 # alias pycharm='nohup /data/home/ML3/intellij/pycharm-community-5.0.1/bin/pycharm.sh > /dev/null 2>&1 &'
-
-# Restart the clipboard, when it stops working.
-alias noclip='killall VBoxClient; VBoxClient-all'
 
 # Default programs.
 export EDITOR=vim
@@ -135,9 +130,11 @@ fi)'
 # Fuzzy finding files.
 # source ~/.fzf.bash
 # Use bash completion instead
+source ~/.git-prompt.sh
 source ~/.git-completion.bash
 
 # Log console to file
 echo "Terminal logging disabled"
 # mkdir -p $HOME/consolelogs
 # test "$(ps -ocommand= -p $PPID | awk '{print $1}')" == 'script' || (script -f $HOME/consolelogs/$(date +"%d-%b-%y_%H-%M-%S").$USER.${RANDOM}.log)
+alias tidylogs='find ${HOME}/consolelogs/ -mtime +20 -delete'

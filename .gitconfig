@@ -29,6 +29,9 @@
   changed = !git diff $(git merge-base $(git rev-parse --abbrev-ref HEAD) $(git rev-parse --abbrev-ref --symbolic-full-name @{u}))
   pushme = !git push origin $(git rev-parse --abbrev-ref HEAD)
   pullme = !git pull origin $(git rev-parse --abbrev-ref HEAD)
+  signrebase = !git rebase --exec 'git commit --amend --no-edit -n -S' -i # Rebase and sign each commit. Takes a branch name on the end.
+  rebasesign = !git signrebase
+  recents = for-each-ref --sort=committerdate --count=10 refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
 
 [branch "master"]
 ;	mergeoptions = --no-ff

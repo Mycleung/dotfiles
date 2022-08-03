@@ -1,6 +1,8 @@
 [user]
+	email = michaelleung@monzo.com
 	name = Michael Leung
-	email = 
+[url "ssh://git@github.com/monzo/"]
+	insteadOf = https://github.com/monzo/
 
 [alias]
 	co = checkout
@@ -16,13 +18,12 @@
   lgtime = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit --date=iso
   lgme = !git lg --author='Michael Leung' # Log only my commits
   cob = checkout -b # Create and switch branch
-  up = !git pom && git co - && git rebase master # Update master, rebase onto it
-  pom = !git co master && git fetch && git pull origin master # Do a fetch and update master
+  up = !git fetch origin master:master && git rebase master # Update master, rebase onto it
+  pom = !git fetch origin master:master --update-head-ok # Do a fetch and update master
   save = !git add -A && git commit -m 'SAVEPOINT' # Create a quick and dirty commit for easy branch switching
   saveout = !git save && git co # Save and swap branch
   undo = reset HEAD~1 --mixed # Uncommit most recent, the opposite of 'git save'
-  amend = commit -a --amend
-  wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT' && git reset HEAD~1 --hard # I don't use this
+  amend = commit -a --amend --no-edit
   unstage = reset HEAD
   pop = stash pop
   brs = log --branches --graph --pretty='[%C(cyan)%h%Creset]%C(bold cyan)%d%Creset %s'
@@ -31,34 +32,13 @@
   pullme = !git pull origin $(git rev-parse --abbrev-ref HEAD)
   signrebase = !git rebase --exec 'git commit --amend --no-edit -n -S' -i # Rebase and sign each commit. Takes a branch name on the end.
   rebasesign = !git signrebase
-  recents = for-each-ref --sort=committerdate --count=10 refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+  recents = for-each-ref --sort=-committerdate --count=10 refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+  new = !git pom && git co master && git cob
+  continue = "-c core.editor=true rebase --continue"
 
-[branch "master"]
-;	mergeoptions = --no-ff
-
+[commit]
+	verbose = true
 [core]
-  ;autocrlf = input
-  ;
-[merge]
-	tool = vimdiff
-
-[mergetool "diffconflicts"]
-	cmd = diffconflicts vim $BASE $LOCAL $REMOTE $MERGED
-	keepBackup = false
-	trustExitCode = true
-
-[diff]
-;    external = git_diff_wrapper
-[pager]
-;    diff =
-[merge]
-;	tool = diffconflicts
-[mergetool "diffconflicts"]
-;	cmd = diffconflicts gvim $BASE $LOCAL $REMOTE $MERGED
-;	trustExitCode = true
-;	keepBackup = false
-[push]
-	default = matching
-[difftool "vimdiff"]
-  cmd = "vimdiff  \"$REMOTE\" \"$LOCAL\""
-
+	editor = code --wait
+[pull]
+	rebase = false

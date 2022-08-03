@@ -17,10 +17,6 @@ alias grep='grep --color -I'
 # mkdir and cd
 mkdircd() { mkdir "$1" && cd "$1" ; }
 
-# IDES
-# alias idea='nohup /data/home/ML3/scala/idea-IC-143.381.42/bin/idea.sh > /dev/null 2>&1 &'
-# alias pycharm='nohup /data/home/ML3/intellij/pycharm-community-5.0.1/bin/pycharm.sh > /dev/null 2>&1 &'
-
 # Default programs.
 export EDITOR=vim
 export DIFFCMD="vimdiff"
@@ -134,7 +130,7 @@ source ~/.git-prompt.sh
 source ~/.git-completion.bash
 
 # Log console to file
-echo "Terminal logging disabled"
+# echo "Terminal logging disabled"
 # mkdir -p $HOME/consolelogs
 # test "$(ps -ocommand= -p $PPID | awk '{print $1}')" == 'script' || (script -f $HOME/consolelogs/$(date +"%d-%b-%y_%H-%M-%S").$USER.${RANDOM}.log)
-alias tidylogs='find ${HOME}/consolelogs/ -mtime +20 -delete'
+# alias tidylogs='find ${HOME}/consolelogs/ -mtime +20 -delete'

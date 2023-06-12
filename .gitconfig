@@ -1,19 +1,16 @@
 [user]
-	email = michaelleung@monzo.com
-	name = Michael Leung
-[url "ssh://git@github.com/monzo/"]
-	insteadOf = https://github.com/monzo/
-
+  email = michaelycleung@gmail.com
+  name = Michael Leung
 [alias]
-	co = checkout
-	cm = commit
-	rb = rebase
-	br = branch
+  co = checkout
+  cm = commit
+  rb = rebase
+  br = branch
   df = diff --color
   fd = diff --name-only
-	st = status
+  st = status
   cp = cherry-pick
-	hist = log --all --graph --pretty='[%C(cyan)%h%Creset]%C(bold cyan)%d%Creset %s'
+  hist = log --all --graph --pretty='[%C(cyan)%h%Creset]%C(bold cyan)%d%Creset %s'
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
   lgtime = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%ci) %C(bold blue)<%an>%Creset' --abbrev-commit --date=iso
   lgme = !git lg --author='Michael Leung' # Log only my commits
@@ -38,7 +35,5 @@
 
 [commit]
 	verbose = true
-[core]
-	editor = code --wait
 [pull]
 	rebase = false
